@@ -4,6 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 import os
+import re
 
 class Tutsplus:
 
@@ -89,7 +90,7 @@ class Tutsplus:
             download_link = download_link[1]
 
         # String name of the file
-        name = self.course_title + '/[' + str(self.video_number) + '] ' + lesson['titolo'].replace('/','-')
+        name = self.course_title + '/[' + str(self.video_number) + '] ' + re.sub('[\?*]', '', lesson['titolo'])
         self.download_file(download_link['href'],name)
         print '[*] Downloaded > ' + lesson['titolo']
 
